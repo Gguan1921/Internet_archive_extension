@@ -15,5 +15,8 @@
             "128": "images/BYGRuZmj_400x400.jpg"
         }
     },
-    "content_scripts": [{}]
+    "content_scripts": [ {
+        "matches": ["https://www.bbc.com/news/world-asia-china-57780023"],
+        "js": ["wayback_check.js"]
+      } ]
   }
