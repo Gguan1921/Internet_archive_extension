@@ -13,26 +13,33 @@ function get_archive_url ()
 async function check_avil(theUrl)
 {
     var rUrl = "https://archive.org/wayback/available?url=" + theUrl;
-    let response = await fetch(rUrl);
-    let data = await response.json();
-    // console.log (data);
-    // console.log (data["archived_snapshots"]["closest"]["available"]);
-    return data["archived_snapshots"]["closest"]["available"];
+    const response = await fetch(rUrl);
+    if (!response.ok){
+        const message = `Failed to fetch status: ${response.status}`;
+        throw new Error (message);
+    }
+
+    const result = await response.json();
+
+    return result["archived_snapshots"]["closest"]["available"];
 }
 
+function main()
+{
+    var cUrl = get_ori_url();
+    var avil;
+    (async function() {
+        try{
+            avil = await check_avil(cUrl);
+            console.log (avil);
+        } catch (e) {
+            console.log (e);
+        }
+    })();
+}
 
-var cUrl = get_ori_url();
+main();
 
-var page_status;
-
-// (async () => {
-//     console.log(await check_avil(cUrl))
-//   })()
-
-(async () => {
-    page_status = await check_avil(cUrl);
-    console.log(page_status);
-  })()
 
 
 // var xhttp = new XMLHttpRequest();
