@@ -2,25 +2,28 @@
     "name": "Internet Archive tracker",
     "description": "This extension is aimed to track the changes of a webside using Interent Archive as source!",
     "version": "1.0",
-    "manifest_version": 2,
+    "manifest_version": 3,
     "icons": {
         "16": "images/BYGRuZmj_400x400.jpg",
         "48": "images/BYGRuZmj_400x400.jpg",
         "128": "images/BYGRuZmj_400x400.jpg"
     },
-    "page_action": {
-        "default_icon": {
-            "16": "images/BYGRuZmj_400x400.jpg",
-            "48": "images/BYGRuZmj_400x400.jpg",
-            "128": "images/BYGRuZmj_400x400.jpg"
-        }
-    },
+    // "page_action": {
+    //     "default_icon": {
+    //         "16": "images/BYGRuZmj_400x400.jpg",
+    //         "48": "images/BYGRuZmj_400x400.jpg",
+    //         "128": "images/BYGRuZmj_400x400.jpg"
+    //     }
+    // },
     "content_scripts": [ {
-        "matches": ["https://www.bbc.com/news/world-asia-china-57780023"],
-        "js": ["wayback_check.js"]
+        "matches": ["https://www.bbc.com/news/world-asia-china-57780023",
+        "https://web.archive.org/*"],
+        "js": ["./src/wayback_check.js"]
       } ],
-    "permissions": [
-
-        "https://web.archive.org/*"
-    ]
+    "host_permissions": [
+        "https://archive.org/*",
+        "https://web.archive.org/*",
+        "https://timetravel.mementoweb.org/guide/api/*"
+    ],
+    "permissions" :["tabs"]
   }
